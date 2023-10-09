@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Posts {
+struct Posts: Decodable {
     let posts: [PostsData]
 }
 
-struct PostsData {
+struct PostsData: Decodable {
     let postId: Int
     let timeshamp: Int
     let title: String

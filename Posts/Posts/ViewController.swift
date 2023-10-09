@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+            PostsViewModel.sharedInstance.fetchPosts()
         // Do any additional setup after loading the view.
     }
-
-
 }
+
 
