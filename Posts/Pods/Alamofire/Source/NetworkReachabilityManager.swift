@@ -22,7 +22,11 @@
 //  THE SOFTWARE.
 //
 
+<<<<<<< HEAD
 #if canImport(SystemConfiguration)
+=======
+#if !(os(watchOS) || os(Linux) || os(Windows))
+>>>>>>> 1725053 (Add files via upload)
 
 import Foundation
 import SystemConfiguration
@@ -194,8 +198,12 @@ open class NetworkReachabilityManager {
                 let description = weakManager.manager?.flags?.readableDescription ?? "nil"
 
                 return Unmanaged.passRetained(description as CFString)
+<<<<<<< HEAD
             }
         )
+=======
+            })
+>>>>>>> 1725053 (Add files via upload)
         let callback: SCNetworkReachabilityCallBack = { _, flags, info in
             guard let info = info else { return }
 
@@ -267,6 +275,7 @@ extension SCNetworkReachabilityFlags {
     var canConnectWithoutUserInteraction: Bool { canConnectAutomatically && !contains(.interventionRequired) }
     var isActuallyReachable: Bool { isReachable && (!isConnectionRequired || canConnectWithoutUserInteraction) }
     var isCellular: Bool {
+<<<<<<< HEAD
         #if swift(>=5.9)
         #if os(iOS) || os(tvOS) || os(visionOS)
         return contains(.isWWAN)
@@ -274,12 +283,17 @@ extension SCNetworkReachabilityFlags {
         return false
         #endif
         #else
+=======
+>>>>>>> 1725053 (Add files via upload)
         #if os(iOS) || os(tvOS)
         return contains(.isWWAN)
         #else
         return false
         #endif
+<<<<<<< HEAD
         #endif
+=======
+>>>>>>> 1725053 (Add files via upload)
     }
 
     /// Human readable `String` for all states, to help with debugging.

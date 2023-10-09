@@ -69,9 +69,12 @@ public protocol EventMonitor {
 
     // MARK: URLSessionDataDelegate Events
 
+<<<<<<< HEAD
     /// Event called during `URLSessionDataDelegate`'s `urlSession(_:dataTask:didReceive:completionHandler:)` method.
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse)
 
+=======
+>>>>>>> 1725053 (Add files via upload)
     /// Event called during `URLSessionDataDelegate`'s `urlSession(_:dataTask:didReceive:)` method.
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data)
 
@@ -247,7 +250,10 @@ extension EventMonitor {
                            didFinishCollecting metrics: URLSessionTaskMetrics) {}
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {}
     public func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {}
+<<<<<<< HEAD
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) {}
+=======
+>>>>>>> 1725053 (Add files via upload)
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {}
     public func urlSession(_ session: URLSession,
                            dataTask: URLSessionDataTask,
@@ -384,10 +390,13 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.urlSession(session, taskIsWaitingForConnectivity: task) }
     }
 
+<<<<<<< HEAD
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) {
         performEvent { $0.urlSession(session, dataTask: dataTask, didReceive: response) }
     }
 
+=======
+>>>>>>> 1725053 (Add files via upload)
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         performEvent { $0.urlSession(session, dataTask: dataTask, didReceive: data) }
     }
@@ -601,9 +610,12 @@ open class ClosureEventMonitor: EventMonitor {
     /// Closure called on the `urlSession(_:taskIsWaitingForConnectivity:)` event.
     open var taskIsWaitingForConnectivity: ((URLSession, URLSessionTask) -> Void)?
 
+<<<<<<< HEAD
     /// Closure called on the `urlSession(_:dataTask:didReceive:completionHandler:)` event.
     open var dataTaskDidReceiveResponse: ((URLSession, URLSessionDataTask, URLResponse) -> Void)?
 
+=======
+>>>>>>> 1725053 (Add files via upload)
     /// Closure that receives the `urlSession(_:dataTask:didReceive:)` event.
     open var dataTaskDidReceiveData: ((URLSession, URLSessionDataTask, Data) -> Void)?
 
@@ -752,10 +764,13 @@ open class ClosureEventMonitor: EventMonitor {
         taskIsWaitingForConnectivity?(session, task)
     }
 
+<<<<<<< HEAD
     open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) {
         dataTaskDidReceiveResponse?(session, dataTask, response)
     }
 
+=======
+>>>>>>> 1725053 (Add files via upload)
     open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         dataTaskDidReceiveData?(session, dataTask, data)
     }

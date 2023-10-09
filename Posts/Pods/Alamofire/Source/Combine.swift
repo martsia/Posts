@@ -22,7 +22,11 @@
 //  THE SOFTWARE.
 //
 
+<<<<<<< HEAD
 #if !((os(iOS) && (arch(i386) || arch(arm))) || os(Windows) || os(Linux) || os(Android))
+=======
+#if !((os(iOS) && (arch(i386) || arch(arm))) || os(Windows) || os(Linux))
+>>>>>>> 1725053 (Add files via upload)
 
 import Combine
 import Dispatch

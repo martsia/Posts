@@ -24,9 +24,15 @@
 
 import Foundation
 
+<<<<<<< HEAD
 #if canImport(MobileCoreServices)
 import MobileCoreServices
 #elseif canImport(CoreServices)
+=======
+#if os(iOS) || os(watchOS) || os(tvOS)
+import MobileCoreServices
+#elseif os(macOS)
+>>>>>>> 1725053 (Add files via upload)
 import CoreServices
 #endif
 
@@ -213,7 +219,11 @@ open class MultipartFormData {
         //              Check 2 - is file URL reachable?
         //============================================================
 
+<<<<<<< HEAD
         #if !(os(Linux) || os(Windows) || os(Android))
+=======
+        #if !(os(Linux) || os(Windows))
+>>>>>>> 1725053 (Add files via upload)
         do {
             let isReachable = try fileURL.checkPromisedItemIsReachable()
             guard isReachable else {
@@ -455,11 +465,17 @@ open class MultipartFormData {
         inputStream.open()
         defer { inputStream.close() }
 
+<<<<<<< HEAD
         var bytesLeftToRead = bodyPart.bodyContentLength
         while inputStream.hasBytesAvailable && bytesLeftToRead > 0 {
             let bufferSize = min(streamBufferSize, Int(bytesLeftToRead))
             var buffer = [UInt8](repeating: 0, count: bufferSize)
             let bytesRead = inputStream.read(&buffer, maxLength: bufferSize)
+=======
+        while inputStream.hasBytesAvailable {
+            var buffer = [UInt8](repeating: 0, count: streamBufferSize)
+            let bytesRead = inputStream.read(&buffer, maxLength: streamBufferSize)
+>>>>>>> 1725053 (Add files via upload)
 
             if let streamError = inputStream.streamError {
                 throw AFError.multipartEncodingFailed(reason: .inputStreamReadFailed(error: streamError))
@@ -471,7 +487,10 @@ open class MultipartFormData {
                 }
 
                 try write(&buffer, to: outputStream)
+<<<<<<< HEAD
                 bytesLeftToRead -= UInt64(bytesRead)
+=======
+>>>>>>> 1725053 (Add files via upload)
             } else {
                 break
             }
@@ -552,6 +571,7 @@ extension MultipartFormData {
     // MARK: - Private - Mime Type
 
     private func mimeType(forPathExtension pathExtension: String) -> String {
+<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 14, macOS 11, tvOS 14, watchOS 7, visionOS 1, *) {
             return UTType(filenameExtension: pathExtension)?.preferredMIMEType ?? "application/octet-stream"
@@ -565,6 +585,8 @@ extension MultipartFormData {
             return "application/octet-stream"
         }
         #else
+=======
+>>>>>>> 1725053 (Add files via upload)
         if #available(iOS 14, macOS 11, tvOS 14, watchOS 7, *) {
             return UTType(filenameExtension: pathExtension)?.preferredMIMEType ?? "application/octet-stream"
         } else {
@@ -576,7 +598,10 @@ extension MultipartFormData {
 
             return "application/octet-stream"
         }
+<<<<<<< HEAD
         #endif
+=======
+>>>>>>> 1725053 (Add files via upload)
     }
 }
 
@@ -586,7 +611,11 @@ extension MultipartFormData {
     // MARK: - Private - Mime Type
 
     private func mimeType(forPathExtension pathExtension: String) -> String {
+<<<<<<< HEAD
         #if canImport(CoreServices) || canImport(MobileCoreServices)
+=======
+        #if !(os(Linux) || os(Windows))
+>>>>>>> 1725053 (Add files via upload)
         if
             let id = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
             let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue() {

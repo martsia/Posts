@@ -1,5 +1,9 @@
 PODS:
+<<<<<<< HEAD
   - Alamofire (5.8.0)
+=======
+  - Alamofire (5.7.1)
+>>>>>>> 1725053 (Add files via upload)
 
 DEPENDENCIES:
   - Alamofire
@@ -9,7 +13,11 @@ SPEC REPOS:
     - Alamofire
 
 SPEC CHECKSUMS:
+<<<<<<< HEAD
   Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+=======
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+>>>>>>> 1725053 (Add files via upload)
 
 PODFILE CHECKSUM: 5e07d7c9d4b76cc47c795cffc6475063a10f25a4
 
