@@ -34,22 +34,12 @@ public struct HTTPHeaders {
     /// Creates an instance from an array of `HTTPHeader`s. Duplicate case-insensitive names are collapsed into the last
     /// name and value encountered.
     public init(_ headers: [HTTPHeader]) {
-<<<<<<< HEAD
-=======
-        self.init()
-
->>>>>>> 1725053 (Add files via upload)
         headers.forEach { update($0) }
     }
 
     /// Creates an instance from a `[String: String]`. Duplicate case-insensitive names are collapsed into the last name
     /// and value encountered.
     public init(_ dictionary: [String: String]) {
-<<<<<<< HEAD
-=======
-        self.init()
-
->>>>>>> 1725053 (Add files via upload)
         dictionary.forEach { update(HTTPHeader(name: $0.key, value: $0.value)) }
     }
 
@@ -151,11 +141,6 @@ public struct HTTPHeaders {
 
 extension HTTPHeaders: ExpressibleByDictionaryLiteral {
     public init(dictionaryLiteral elements: (String, String)...) {
-<<<<<<< HEAD
-=======
-        self.init()
-
->>>>>>> 1725053 (Add files via upload)
         elements.forEach { update(name: $0.0, value: $0.1) }
     }
 }
@@ -414,11 +399,8 @@ extension HTTPHeader {
                 return "Linux"
                 #elseif os(Windows)
                 return "Windows"
-<<<<<<< HEAD
                 #elseif os(Android)
                 return "Android"
-=======
->>>>>>> 1725053 (Add files via upload)
                 #else
                 return "Unknown"
                 #endif

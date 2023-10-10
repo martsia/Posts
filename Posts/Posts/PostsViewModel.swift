@@ -6,7 +6,6 @@
 //
 
 import Foundation
-<<<<<<< HEAD
 import Alamofire
 
 class PostsViewModel {
@@ -38,6 +37,4 @@ class PostsViewModel {
             }
     }
 }
-=======
->>>>>>> 1725053 (Add files via upload)
 

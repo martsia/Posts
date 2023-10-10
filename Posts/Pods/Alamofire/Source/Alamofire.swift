@@ -37,8 +37,4 @@ import Foundation
 public let AF = Session.default
 
 /// Current Alamofire version. Necessary since SPM doesn't use dynamic libraries. Plus this will be more accurate.
-<<<<<<< HEAD
 let version = "5.8.0"
-=======
-let version = "5.7.1"
->>>>>>> 1725053 (Add files via upload)

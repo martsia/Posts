@@ -131,11 +131,7 @@ struct RequestTaskMap {
 
         switch (events.completed, events.metricsGathered) {
         case (true, _): fatalError("RequestTaskMap consistency error: duplicate completionReceivedForTask call.")
-<<<<<<< HEAD
         #if os(Linux) || os(Android) // Linux doesn't gather metrics, so unconditionally remove the reference and return true.
-=======
-        #if os(Linux) // Linux doesn't gather metrics, so unconditionally remove the reference and return true.
->>>>>>> 1725053 (Add files via upload)
         default: self[task] = nil; return true
         #else
         case (false, false):

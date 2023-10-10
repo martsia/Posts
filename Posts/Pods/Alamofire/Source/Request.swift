@@ -416,13 +416,9 @@ public class Request {
     func didCancel() {
         dispatchPrecondition(condition: .onQueue(underlyingQueue))
 
-<<<<<<< HEAD
         $mutableState.write { mutableState in
             mutableState.error = mutableState.error ?? AFError.explicitlyCancelled
         }
-=======
-        error = error ?? AFError.explicitlyCancelled
->>>>>>> 1725053 (Add files via upload)
 
         eventMonitor?.requestDidCancel(self)
     }
@@ -869,17 +865,7 @@ public class Request {
     /// - Returns:           The instance.
     @discardableResult
     public func cURLDescription(calling handler: @escaping (String) -> Void) -> Self {
-<<<<<<< HEAD
         cURLDescription(on: underlyingQueue, calling: handler)
-=======
-        $mutableState.write { mutableState in
-            if mutableState.requests.last != nil {
-                underlyingQueue.async { handler(self.cURLDescription()) }
-            } else {
-                mutableState.cURLHandler = (underlyingQueue, handler)
-            }
-        }
->>>>>>> 1725053 (Add files via upload)
 
         return self
     }
@@ -945,16 +931,11 @@ public class Request {
 
     /// Final cleanup step executed when the instance finishes response serialization.
     func cleanup() {
-<<<<<<< HEAD
-=======
-        delegate?.cleanup(after: self)
->>>>>>> 1725053 (Add files via upload)
         let handlers = $mutableState.finishHandlers
         handlers.forEach { $0() }
         $mutableState.write { state in
             state.finishHandlers.removeAll()
         }
-<<<<<<< HEAD
 
         delegate?.cleanup(after: self)
     }
@@ -974,8 +955,6 @@ extension Request {
             case .cancel: return .cancel
             }
         }
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 }
 
@@ -1120,7 +1099,6 @@ public class DataRequest: Request {
     /// `URLRequestConvertible` value used to create `URLRequest`s for this instance.
     public let convertible: URLRequestConvertible
     /// `Data` read from the server so far.
-<<<<<<< HEAD
     public var data: Data? { $dataMutableState.data }
 
     private struct DataMutableState {
@@ -1132,13 +1110,6 @@ public class DataRequest: Request {
 
     @Protected
     private var dataMutableState = DataMutableState()
-=======
-    public var data: Data? { mutableData }
-
-    /// Protected storage for the `Data` read by the instance.
-    @Protected
-    private var mutableData: Data? = nil
->>>>>>> 1725053 (Add files via upload)
 
     /// Creates a `DataRequest` using the provided parameters.
     ///
@@ -1171,13 +1142,9 @@ public class DataRequest: Request {
     override func reset() {
         super.reset()
 
-<<<<<<< HEAD
         $dataMutableState.write { mutableState in
             mutableState.data = nil
         }
-=======
-        mutableData = nil
->>>>>>> 1725053 (Add files via upload)
     }
 
     /// Called when `Data` is received by this instance.
@@ -1186,25 +1153,17 @@ public class DataRequest: Request {
     ///
     /// - Parameter data: The `Data` received.
     func didReceive(data: Data) {
-<<<<<<< HEAD
         $dataMutableState.write { mutableState in
             if mutableState.data == nil {
                 mutableState.data = data
             } else {
                 mutableState.data?.append(data)
             }
-=======
-        if self.data == nil {
-            mutableData = data
-        } else {
-            $mutableData.write { $0?.append(data) }
->>>>>>> 1725053 (Add files via upload)
         }
 
         updateDownloadProgress()
     }
 
-<<<<<<< HEAD
     func didReceiveResponse(_ response: HTTPURLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         $dataMutableState.read { dataMutableState in
             guard let httpResponseHandler = dataMutableState.httpResponseHandler else {
@@ -1229,8 +1188,6 @@ public class DataRequest: Request {
         }
     }
 
-=======
->>>>>>> 1725053 (Add files via upload)
     override func task(for request: URLRequest, using session: URLSession) -> URLSessionTask {
         let copiedRequest = request
         return session.dataTask(with: copiedRequest)
@@ -1274,7 +1231,6 @@ public class DataRequest: Request {
 
         return self
     }
-<<<<<<< HEAD
 
     /// Sets a closure called whenever the `DataRequest` produces an `HTTPURLResponse` and providing a completion
     /// handler to return a `ResponseDisposition` value.
@@ -1316,8 +1272,6 @@ public class DataRequest: Request {
 
         return self
     }
-=======
->>>>>>> 1725053 (Add files via upload)
 }
 
 // MARK: - DataStreamRequest
@@ -1394,13 +1348,10 @@ public final class DataStreamRequest: Request {
         var numberOfExecutingStreams = 0
         /// Completion calls enqueued while streams are still executing.
         var enqueuedCompletionEvents: [() -> Void] = []
-<<<<<<< HEAD
         /// Handler for any `HTTPURLResponse`s received.
         var httpResponseHandler: (queue: DispatchQueue,
                                   handler: (_ response: HTTPURLResponse,
                                             _ completionHandler: @escaping (ResponseDisposition) -> Void) -> Void)?
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 
     @Protected
@@ -1457,11 +1408,7 @@ public final class DataStreamRequest: Request {
 
     func didReceive(data: Data) {
         $streamMutableState.write { state in
-<<<<<<< HEAD
             #if !canImport(FoundationNetworking) // If we not using swift-corelibs-foundation.
-=======
-            #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
             if let stream = state.outputStream {
                 underlyingQueue.async {
                     var bytes = Array(data)
@@ -1475,7 +1422,6 @@ public final class DataStreamRequest: Request {
         }
     }
 
-<<<<<<< HEAD
     func didReceiveResponse(_ response: HTTPURLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         $streamMutableState.read { dataMutableState in
             guard let httpResponseHandler = dataMutableState.httpResponseHandler else {
@@ -1500,8 +1446,6 @@ public final class DataStreamRequest: Request {
         }
     }
 
-=======
->>>>>>> 1725053 (Add files via upload)
     /// Validates the `URLRequest` and `HTTPURLResponse` received for the instance using the provided `Validation` closure.
     ///
     /// - Parameter validation: `Validation` closure used to validate the request and response.
@@ -1529,11 +1473,7 @@ public final class DataStreamRequest: Request {
         return self
     }
 
-<<<<<<< HEAD
     #if !canImport(FoundationNetworking) // If we not using swift-corelibs-foundation.
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// Produces an `InputStream` that receives the `Data` received by the instance.
     ///
     /// - Note: The `InputStream` produced by this method must have `open()` called before being able to read `Data`.
@@ -1558,7 +1498,6 @@ public final class DataStreamRequest: Request {
     }
     #endif
 
-<<<<<<< HEAD
     /// Sets a closure called whenever the `DataRequest` produces an `HTTPURLResponse` and providing a completion
     /// handler to return a `ResponseDisposition` value.
     ///
@@ -1600,8 +1539,6 @@ public final class DataStreamRequest: Request {
         return self
     }
 
-=======
->>>>>>> 1725053 (Add files via upload)
     func capturingError(from closure: () throws -> Void) {
         do {
             try closure()
@@ -1775,11 +1712,7 @@ public class DownloadRequest: Request {
     ///
     /// - Note: For more information about `resumeData`, see [Apple's documentation](https://developer.apple.com/documentation/foundation/urlsessiondownloadtask/1411634-cancel).
     public var resumeData: Data? {
-<<<<<<< HEAD
         #if !canImport(FoundationNetworking) // If we not using swift-corelibs-foundation.
-=======
-        #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
         return $mutableDownloadState.resumeData ?? error?.downloadResumeData
         #else
         return $mutableDownloadState.resumeData

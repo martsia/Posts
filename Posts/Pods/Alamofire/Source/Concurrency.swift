@@ -37,11 +37,7 @@ extension Request {
     /// - Returns:                   The `StreamOf<Progress>`.
     public func uploadProgress(bufferingPolicy: StreamOf<Progress>.BufferingPolicy = .unbounded) -> StreamOf<Progress> {
         stream(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
-<<<<<<< HEAD
             uploadProgress(queue: underlyingQueue) { progress in
-=======
-            uploadProgress(queue: .singleEventQueue) { progress in
->>>>>>> 1725053 (Add files via upload)
                 continuation.yield(progress)
             }
         }
@@ -54,11 +50,7 @@ extension Request {
     /// - Returns:                   The `StreamOf<Progress>`.
     public func downloadProgress(bufferingPolicy: StreamOf<Progress>.BufferingPolicy = .unbounded) -> StreamOf<Progress> {
         stream(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
-<<<<<<< HEAD
             downloadProgress(queue: underlyingQueue) { progress in
-=======
-            downloadProgress(queue: .singleEventQueue) { progress in
->>>>>>> 1725053 (Add files via upload)
                 continuation.yield(progress)
             }
         }
@@ -71,11 +63,7 @@ extension Request {
     /// - Returns:                   The `StreamOf<URLRequest>`.
     public func urlRequests(bufferingPolicy: StreamOf<URLRequest>.BufferingPolicy = .unbounded) -> StreamOf<URLRequest> {
         stream(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
-<<<<<<< HEAD
             onURLRequestCreation(on: underlyingQueue) { request in
-=======
-            onURLRequestCreation(on: .singleEventQueue) { request in
->>>>>>> 1725053 (Add files via upload)
                 continuation.yield(request)
             }
         }
@@ -88,11 +76,7 @@ extension Request {
     /// - Returns:                   The `StreamOf<URLSessionTask>`.
     public func urlSessionTasks(bufferingPolicy: StreamOf<URLSessionTask>.BufferingPolicy = .unbounded) -> StreamOf<URLSessionTask> {
         stream(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
-<<<<<<< HEAD
             onURLSessionTaskCreation(on: underlyingQueue) { task in
-=======
-            onURLSessionTaskCreation(on: .singleEventQueue) { task in
->>>>>>> 1725053 (Add files via upload)
                 continuation.yield(task)
             }
         }
@@ -105,25 +89,15 @@ extension Request {
     /// - Returns:                   The `StreamOf<String>`.
     public func cURLDescriptions(bufferingPolicy: StreamOf<String>.BufferingPolicy = .unbounded) -> StreamOf<String> {
         stream(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
-<<<<<<< HEAD
             cURLDescription(on: underlyingQueue) { description in
-=======
-            cURLDescription(on: .singleEventQueue) { description in
->>>>>>> 1725053 (Add files via upload)
                 continuation.yield(description)
             }
         }
     }
 
-<<<<<<< HEAD
     fileprivate func stream<T>(of type: T.Type = T.self,
                                bufferingPolicy: StreamOf<T>.BufferingPolicy = .unbounded,
                                yielder: @escaping (StreamOf<T>.Continuation) -> Void) -> StreamOf<T> {
-=======
-    private func stream<T>(of type: T.Type = T.self,
-                           bufferingPolicy: StreamOf<T>.BufferingPolicy = .unbounded,
-                           yielder: @escaping (StreamOf<T>.Continuation) -> Void) -> StreamOf<T> {
->>>>>>> 1725053 (Add files via upload)
         StreamOf<T>(bufferingPolicy: bufferingPolicy) { [unowned self] continuation in
             yielder(continuation)
             // Must come after serializers run in order to catch retry progress.
@@ -194,7 +168,6 @@ public struct DataTask<Value> {
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension DataRequest {
-<<<<<<< HEAD
     /// Creates a `StreamOf<HTTPURLResponse>` for the instance's responses.
     ///
     /// - Parameter bufferingPolicy: `BufferingPolicy` that determines the stream's buffering behavior.`.unbounded` by default.
@@ -260,28 +233,18 @@ extension DataRequest {
     }
     #endif
 
-=======
->>>>>>> 1725053 (Add files via upload)
     /// Creates a `DataTask` to `await` a `Data` value.
     ///
     /// - Parameters:
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DataTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before completion.
     ///   - emptyResponseCodes:        HTTP response codes for which empty responses are allowed. `[204, 205]` by default.
     ///   - emptyRequestMethods:       `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
     ///
     /// - Returns: The `DataTask`.
-<<<<<<< HEAD
     public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-    public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                 dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
                                 emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
                                 emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods) -> DataTask<Data> {
@@ -297,11 +260,7 @@ extension DataRequest {
     ///   - type:                      `Decodable` type to decode from response data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DataTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before calling the serializer.
     ///                                `PassthroughPreprocessor()` by default.
     ///   - decoder:                   `DataDecoder` to use to decode the response. `JSONDecoder()` by default.
@@ -310,11 +269,7 @@ extension DataRequest {
     ///
     /// - Returns: The `DataTask`.
     public func serializingDecodable<Value: Decodable>(_ type: Value.Type = Value.self,
-<<<<<<< HEAD
                                                        automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-                                                       automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                                        dataPreprocessor: DataPreprocessor = DecodableResponseSerializer<Value>.defaultDataPreprocessor,
                                                        decoder: DataDecoder = JSONDecoder(),
                                                        emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
@@ -331,11 +286,7 @@ extension DataRequest {
     /// - Parameters:
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DataTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before calling the serializer.
     ///                                `PassthroughPreprocessor()` by default.
     ///   - encoding:                  `String.Encoding` to use during serialization. Defaults to `nil`, in which case
@@ -345,11 +296,7 @@ extension DataRequest {
     ///   - emptyRequestMethods:       `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
     ///
     /// - Returns: The `DataTask`.
-<<<<<<< HEAD
     public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-    public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                   dataPreprocessor: DataPreprocessor = StringResponseSerializer.defaultDataPreprocessor,
                                   encoding: String.Encoding? = nil,
                                   emptyResponseCodes: Set<Int> = StringResponseSerializer.defaultEmptyResponseCodes,
@@ -367,7 +314,6 @@ extension DataRequest {
     ///   - serializer:                `ResponseSerializer` responsible for serializing the request, response, and data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DataTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
     ///
     /// - Returns: The `DataTask`.
@@ -378,18 +324,6 @@ extension DataRequest {
             response(queue: underlyingQueue,
                      responseSerializer: serializer,
                      completionHandler: $0)
-=======
-    ///                                properties. `false` by default.
-    ///
-    /// - Returns: The `DataTask`.
-    public func serializingResponse<Serializer: ResponseSerializer>(using serializer: Serializer,
-                                                                    automaticallyCancelling shouldAutomaticallyCancel: Bool = false)
-        -> DataTask<Serializer.SerializedObject> {
-        dataTask(automaticallyCancelling: shouldAutomaticallyCancel) {
-            self.response(queue: .singleEventQueue,
-                          responseSerializer: serializer,
-                          completionHandler: $0)
->>>>>>> 1725053 (Add files via upload)
         }
     }
 
@@ -400,7 +334,6 @@ extension DataRequest {
     ///                                response, and data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DataTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
     ///
     /// - Returns: The `DataTask`.
@@ -411,18 +344,6 @@ extension DataRequest {
             response(queue: underlyingQueue,
                      responseSerializer: serializer,
                      completionHandler: $0)
-=======
-    ///                                properties. `false` by default.
-    ///
-    /// - Returns: The `DataTask`.
-    public func serializingResponse<Serializer: DataResponseSerializerProtocol>(using serializer: Serializer,
-                                                                                automaticallyCancelling shouldAutomaticallyCancel: Bool = false)
-        -> DataTask<Serializer.SerializedObject> {
-        dataTask(automaticallyCancelling: shouldAutomaticallyCancel) {
-            self.response(queue: .singleEventQueue,
-                          responseSerializer: serializer,
-                          completionHandler: $0)
->>>>>>> 1725053 (Add files via upload)
         }
     }
 
@@ -510,21 +431,13 @@ extension DownloadRequest {
     /// - Parameters:
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before completion.
     ///   - emptyResponseCodes:        HTTP response codes for which empty responses are allowed. `[204, 205]` by default.
     ///   - emptyRequestMethods:       `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
     ///
     /// - Returns:                   The `DownloadTask`.
-<<<<<<< HEAD
     public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-    public func serializingData(automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                 dataPreprocessor: DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor,
                                 emptyResponseCodes: Set<Int> = DataResponseSerializer.defaultEmptyResponseCodes,
                                 emptyRequestMethods: Set<HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods) -> DownloadTask<Data> {
@@ -542,11 +455,7 @@ extension DownloadRequest {
     ///   - type:                      `Decodable` type to decode from response data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before calling the serializer.
     ///                                `PassthroughPreprocessor()` by default.
     ///   - decoder:                   `DataDecoder` to use to decode the response. `JSONDecoder()` by default.
@@ -555,11 +464,7 @@ extension DownloadRequest {
     ///
     /// - Returns:                   The `DownloadTask`.
     public func serializingDecodable<Value: Decodable>(_ type: Value.Type = Value.self,
-<<<<<<< HEAD
                                                        automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-                                                       automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                                        dataPreprocessor: DataPreprocessor = DecodableResponseSerializer<Value>.defaultDataPreprocessor,
                                                        decoder: DataDecoder = JSONDecoder(),
                                                        emptyResponseCodes: Set<Int> = DecodableResponseSerializer<Value>.defaultEmptyResponseCodes,
@@ -576,17 +481,10 @@ extension DownloadRequest {
     /// - Parameters:
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
     ///
     /// - Returns: The `DownloadTask`.
     public func serializingDownloadedFileURL(automaticallyCancelling shouldAutomaticallyCancel: Bool = true) -> DownloadTask<URL> {
-=======
-    ///                                properties. `false` by default.
-    ///
-    /// - Returns: The `DownloadTask`.
-    public func serializingDownloadedFileURL(automaticallyCancelling shouldAutomaticallyCancel: Bool = false) -> DownloadTask<URL> {
->>>>>>> 1725053 (Add files via upload)
         serializingDownload(using: URLResponseSerializer(),
                             automaticallyCancelling: shouldAutomaticallyCancel)
     }
@@ -596,11 +494,7 @@ extension DownloadRequest {
     /// - Parameters:
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
-=======
-    ///                                properties. `false` by default.
->>>>>>> 1725053 (Add files via upload)
     ///   - dataPreprocessor:          `DataPreprocessor` which processes the received `Data` before calling the
     ///                                serializer. `PassthroughPreprocessor()` by default.
     ///   - encoding:                  `String.Encoding` to use during serialization. Defaults to `nil`, in which case
@@ -610,11 +504,7 @@ extension DownloadRequest {
     ///   - emptyRequestMethods:       `HTTPMethod`s for which empty responses are always valid. `[.head]` by default.
     ///
     /// - Returns:                   The `DownloadTask`.
-<<<<<<< HEAD
     public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Bool = true,
-=======
-    public func serializingString(automaticallyCancelling shouldAutomaticallyCancel: Bool = false,
->>>>>>> 1725053 (Add files via upload)
                                   dataPreprocessor: DataPreprocessor = StringResponseSerializer.defaultDataPreprocessor,
                                   encoding: String.Encoding? = nil,
                                   emptyResponseCodes: Set<Int> = StringResponseSerializer.defaultEmptyResponseCodes,
@@ -632,7 +522,6 @@ extension DownloadRequest {
     ///   - serializer:                `ResponseSerializer` responsible for serializing the request, response, and data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
     ///
     /// - Returns: The `DownloadTask`.
@@ -643,18 +532,6 @@ extension DownloadRequest {
             response(queue: underlyingQueue,
                      responseSerializer: serializer,
                      completionHandler: $0)
-=======
-    ///                                properties. `false` by default.
-    ///
-    /// - Returns: The `DownloadTask`.
-    public func serializingDownload<Serializer: ResponseSerializer>(using serializer: Serializer,
-                                                                    automaticallyCancelling shouldAutomaticallyCancel: Bool = false)
-        -> DownloadTask<Serializer.SerializedObject> {
-        downloadTask(automaticallyCancelling: shouldAutomaticallyCancel) {
-            self.response(queue: .singleEventQueue,
-                          responseSerializer: serializer,
-                          completionHandler: $0)
->>>>>>> 1725053 (Add files via upload)
         }
     }
 
@@ -666,7 +543,6 @@ extension DownloadRequest {
     ///                                response, and data.
     ///   - shouldAutomaticallyCancel: `Bool` determining whether or not the request should be cancelled when the
     ///                                enclosing async context is cancelled. Only applies to `DownloadTask`'s async
-<<<<<<< HEAD
     ///                                properties. `true` by default.
     ///
     /// - Returns: The `DownloadTask`.
@@ -677,18 +553,6 @@ extension DownloadRequest {
             response(queue: underlyingQueue,
                      responseSerializer: serializer,
                      completionHandler: $0)
-=======
-    ///                                properties. `false` by default.
-    ///
-    /// - Returns: The `DownloadTask`.
-    public func serializingDownload<Serializer: DownloadResponseSerializerProtocol>(using serializer: Serializer,
-                                                                                    automaticallyCancelling shouldAutomaticallyCancel: Bool = false)
-        -> DownloadTask<Serializer.SerializedObject> {
-        downloadTask(automaticallyCancelling: shouldAutomaticallyCancel) {
-            self.response(queue: .singleEventQueue,
-                          responseSerializer: serializer,
-                          completionHandler: $0)
->>>>>>> 1725053 (Add files via upload)
         }
     }
 
@@ -826,7 +690,6 @@ public struct DataStreamTask {
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension DataStreamRequest {
-<<<<<<< HEAD
     /// Creates a `StreamOf<HTTPURLResponse>` for the instance's responses.
     ///
     /// - Parameter bufferingPolicy: `BufferingPolicy` that determines the stream's buffering behavior.`.unbounded` by default.
@@ -890,8 +753,6 @@ extension DataStreamRequest {
     }
     #endif
 
-=======
->>>>>>> 1725053 (Add files via upload)
     /// Creates a `DataStreamTask` used to `await` streams of serialized values.
     ///
     /// - Returns: The `DataStreamTask`.

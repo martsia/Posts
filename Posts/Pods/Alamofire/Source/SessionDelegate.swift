@@ -94,11 +94,7 @@ extension SessionDelegate: URLSessionTaskDelegate {
         case NSURLAuthenticationMethodHTTPBasic, NSURLAuthenticationMethodHTTPDigest, NSURLAuthenticationMethodNTLM,
              NSURLAuthenticationMethodNegotiate:
             evaluation = attemptCredentialAuthentication(for: challenge, belongingTo: task)
-<<<<<<< HEAD
         #if canImport(Security)
-=======
-        #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
         case NSURLAuthenticationMethodServerTrust:
             evaluation = attemptServerTrustAuthentication(with: challenge)
         case NSURLAuthenticationMethodClientCertificate:
@@ -115,11 +111,7 @@ extension SessionDelegate: URLSessionTaskDelegate {
         completionHandler(evaluation.disposition, evaluation.credential)
     }
 
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// Evaluates the server trust `URLAuthenticationChallenge` received.
     ///
     /// - Parameter challenge: The `URLAuthenticationChallenge`.
@@ -238,7 +230,6 @@ extension SessionDelegate: URLSessionTaskDelegate {
 // MARK: URLSessionDataDelegate
 
 extension SessionDelegate: URLSessionDataDelegate {
-<<<<<<< HEAD
     open func urlSession(_ session: URLSession,
                          dataTask: URLSessionDataTask,
                          didReceive response: URLResponse,
@@ -258,8 +249,6 @@ extension SessionDelegate: URLSessionDataDelegate {
         }
     }
 
-=======
->>>>>>> 1725053 (Add files via upload)
     open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         eventMonitor?.urlSession(session, dataTask: dataTask, didReceive: data)
 
@@ -268,11 +257,7 @@ extension SessionDelegate: URLSessionDataDelegate {
         } else if let request = request(for: dataTask, as: DataStreamRequest.self) {
             request.didReceive(data: data)
         } else {
-<<<<<<< HEAD
             assertionFailure("dataTask did not find DataRequest or DataStreamRequest in didReceive data")
-=======
-            assertionFailure("dataTask did not find DataRequest or DataStreamRequest in didReceive")
->>>>>>> 1725053 (Add files via upload)
             return
         }
     }

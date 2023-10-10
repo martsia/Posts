@@ -24,13 +24,10 @@
 
 import Foundation
 
-<<<<<<< HEAD
 #if canImport(Security)
 import Security
 #endif
 
-=======
->>>>>>> 1725053 (Add files via upload)
 /// `AFError` is the error type returned by Alamofire. It encompasses a few different types of errors, each with
 /// their own associated reasons.
 public enum AFError: Error {
@@ -136,11 +133,7 @@ public enum AFError: Error {
         case invalidEmptyResponse(type: String)
     }
 
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// Underlying reason a server trust evaluation error occurred.
     public enum ServerTrustFailureReason {
         /// The output of a server trust evaluation.
@@ -222,11 +215,7 @@ public enum AFError: Error {
     case responseValidationFailed(reason: ResponseValidationFailureReason)
     /// Response serialization failed.
     case responseSerializationFailed(reason: ResponseSerializationFailureReason)
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// `ServerTrustEvaluating` instance threw an error during trust evaluation.
     case serverTrustEvaluationFailed(reason: ServerTrustFailureReason)
     #endif
@@ -329,11 +318,7 @@ extension AFError {
         return false
     }
 
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// Returns whether the instance is `.serverTrustEvaluationFailed`. When `true`, the `underlyingError` property will
     /// contain the associated value.
     public var isServerTrustEvaluationError: Bool {
@@ -412,11 +397,7 @@ extension AFError {
             return reason.underlyingError
         case let .responseSerializationFailed(reason):
             return reason.underlyingError
-<<<<<<< HEAD
         #if canImport(Security)
-=======
-        #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
         case let .serverTrustEvaluationFailed(reason):
             return reason.underlyingError
         #endif
@@ -474,11 +455,7 @@ extension AFError {
         return destination
     }
 
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// The download resume data of any underlying network error. Only produced by `DownloadRequest`s.
     public var downloadResumeData: Data? {
         (underlyingError as? URLError)?.userInfo[NSURLSessionDownloadTaskResumeData] as? Data
@@ -637,11 +614,7 @@ extension AFError.ResponseSerializationFailureReason {
     }
 }
 
-<<<<<<< HEAD
 #if canImport(Security)
-=======
-#if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
 extension AFError.ServerTrustFailureReason {
     var output: AFError.ServerTrustFailureReason.Output? {
         switch self {
@@ -719,11 +692,7 @@ extension AFError: LocalizedError {
             """
         case let .sessionInvalidated(error):
             return "Session was invalidated with error: \(error?.localizedDescription ?? "No description.")"
-<<<<<<< HEAD
         #if canImport(Security)
-=======
-        #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
         case let .serverTrustEvaluationFailed(reason):
             return "Server trust evaluation failed due to reason: \(reason.localizedDescription)"
         #endif
@@ -857,11 +826,7 @@ extension AFError.ResponseValidationFailureReason {
     }
 }
 
-<<<<<<< HEAD
 #if canImport(Security)
-=======
-#if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
 extension AFError.ServerTrustFailureReason {
     var localizedDescription: String {
         switch self {

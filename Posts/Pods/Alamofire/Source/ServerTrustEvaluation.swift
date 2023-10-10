@@ -1,9 +1,5 @@
 //
-<<<<<<< HEAD
 //  ServerTrustEvaluation.swift
-=======
-//  ServerTrustPolicy.swift
->>>>>>> 1725053 (Add files via upload)
 //
 //  Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
 //
@@ -52,11 +48,7 @@ open class ServerTrustManager {
         self.evaluators = evaluators
     }
 
-<<<<<<< HEAD
     #if canImport(Security)
-=======
-    #if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
     /// Returns the `ServerTrustEvaluating` value for the given host, if one is set.
     ///
     /// By default, this method will return the policy that perfectly matches the given host. Subclasses could override
@@ -83,13 +75,8 @@ open class ServerTrustManager {
 
 /// A protocol describing the API used to evaluate server trusts.
 public protocol ServerTrustEvaluating {
-<<<<<<< HEAD
     #if !canImport(Security)
     // Implement this once other platforms have API for evaluating server trusts.
-=======
-    #if os(Linux) || os(Windows)
-    // Implement this once Linux/Windows has API for evaluating server trusts.
->>>>>>> 1725053 (Add files via upload)
     #else
     /// Evaluates the given `SecTrust` value for the given `host`.
     ///
@@ -104,11 +91,7 @@ public protocol ServerTrustEvaluating {
 
 // MARK: - Server Trust Evaluators
 
-<<<<<<< HEAD
 #if canImport(Security)
-=======
-#if !(os(Linux) || os(Windows))
->>>>>>> 1725053 (Add files via upload)
 /// An evaluator which uses the default server trust evaluation while allowing you to control whether to validate the
 /// host provided by the challenge. Applications are encouraged to always validate the host in production environments
 /// to guarantee the validity of the server's certificate chain.
@@ -198,7 +181,6 @@ public final class RevocationTrustEvaluator: ServerTrustEvaluating {
             try trust.af.performValidation(forHost: host)
         }
 
-<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, visionOS 1, *) {
             try trust.af.evaluate(afterApplying: SecPolicy.af.revocation(options: options))
@@ -208,8 +190,6 @@ public final class RevocationTrustEvaluator: ServerTrustEvaluating {
             }
         }
         #else
-=======
->>>>>>> 1725053 (Add files via upload)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *) {
             try trust.af.evaluate(afterApplying: SecPolicy.af.revocation(options: options))
         } else {
@@ -217,10 +197,7 @@ public final class RevocationTrustEvaluator: ServerTrustEvaluating {
                 AFError.serverTrustEvaluationFailed(reason: .revocationCheckFailed(output: .init(host, trust, status, result), options: options))
             }
         }
-<<<<<<< HEAD
         #endif
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 }
 
@@ -388,15 +365,8 @@ public final class PublicKeysTrustEvaluator: ServerTrustEvaluating {
 
         let pinnedKeysInServerKeys: Bool = {
             for serverPublicKey in trust.af.publicKeys {
-<<<<<<< HEAD
                 if keys.contains(serverPublicKey) {
                     return true
-=======
-                for pinnedPublicKey in keys {
-                    if serverPublicKey == pinnedPublicKey {
-                        return true
-                    }
->>>>>>> 1725053 (Add files via upload)
                 }
             }
             return false
@@ -487,11 +457,7 @@ public final class DisabledTrustEvaluator: ServerTrustEvaluating {
 // MARK: - Extensions
 
 extension Array where Element == ServerTrustEvaluating {
-<<<<<<< HEAD
     #if os(Linux) || os(Windows) || os(Android)
-=======
-    #if os(Linux) || os(Windows)
->>>>>>> 1725053 (Add files via upload)
     // Add this same convenience method for Linux/Windows.
     #else
     /// Evaluates the given `SecTrust` value for the given `host`.
@@ -640,7 +606,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
 
     /// The `SecCertificate`s contained in `self`.
     public var certificates: [SecCertificate] {
-<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 15, macOS 12, tvOS 15, watchOS 8, visionOS 1, *) {
             return (SecTrustCopyCertificateChain(type) as? [SecCertificate]) ?? []
@@ -650,9 +615,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
             }
         }
         #elseif swift(>=5.5.1) // Xcode 13.1 / 2021 SDKs.
-=======
-        #if swift(>=5.5.1) // Xcode 13.1 / 2021 SDKs.
->>>>>>> 1725053 (Add files via upload)
         if #available(iOS 15, macOS 12, tvOS 15, watchOS 8, *) {
             return (SecTrustCopyCertificateChain(type) as? [SecCertificate]) ?? []
         } else {
@@ -677,7 +639,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
     /// - Parameter host: The hostname, used only in the error output if validation fails.
     /// - Throws: An `AFError.serverTrustEvaluationFailed` instance with a `.defaultEvaluationFailed` reason.
     public func performDefaultValidation(forHost host: String) throws {
-<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, visionOS 1, *) {
             try evaluate(afterApplying: SecPolicy.af.default)
@@ -687,8 +648,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
             }
         }
         #else
-=======
->>>>>>> 1725053 (Add files via upload)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *) {
             try evaluate(afterApplying: SecPolicy.af.default)
         } else {
@@ -696,10 +655,7 @@ extension AlamofireExtension where ExtendedType == SecTrust {
                 AFError.serverTrustEvaluationFailed(reason: .defaultEvaluationFailed(output: .init(host, type, status, result)))
             }
         }
-<<<<<<< HEAD
         #endif
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 
     /// Validates `self` after applying `SecPolicy.af.hostname(host)`, which performs the default validation as well as
@@ -708,7 +664,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
     /// - Parameter host: The hostname to use in the validation.
     /// - Throws:         An `AFError.serverTrustEvaluationFailed` instance with a `.defaultEvaluationFailed` reason.
     public func performValidation(forHost host: String) throws {
-<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, visionOS 1, *) {
             try evaluate(afterApplying: SecPolicy.af.hostname(host))
@@ -718,8 +673,6 @@ extension AlamofireExtension where ExtendedType == SecTrust {
             }
         }
         #else
-=======
->>>>>>> 1725053 (Add files via upload)
         if #available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *) {
             try evaluate(afterApplying: SecPolicy.af.hostname(host))
         } else {
@@ -727,10 +680,7 @@ extension AlamofireExtension where ExtendedType == SecTrust {
                 AFError.serverTrustEvaluationFailed(reason: .hostValidationFailed(output: .init(host, type, status, result)))
             }
         }
-<<<<<<< HEAD
         #endif
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 }
 
@@ -790,7 +740,6 @@ extension AlamofireExtension where ExtendedType == SecCertificate {
 
         guard let createdTrust = trust, trustCreationStatus == errSecSuccess else { return nil }
 
-<<<<<<< HEAD
         #if swift(>=5.9)
         if #available(iOS 14, macOS 11, tvOS 14, watchOS 7, visionOS 1, *) {
             return SecTrustCopyKey(createdTrust)
@@ -798,17 +747,12 @@ extension AlamofireExtension where ExtendedType == SecCertificate {
             return SecTrustCopyPublicKey(createdTrust)
         }
         #else
-=======
->>>>>>> 1725053 (Add files via upload)
         if #available(iOS 14, macOS 11, tvOS 14, watchOS 7, *) {
             return SecTrustCopyKey(createdTrust)
         } else {
             return SecTrustCopyPublicKey(createdTrust)
         }
-<<<<<<< HEAD
         #endif
-=======
->>>>>>> 1725053 (Add files via upload)
     }
 }
 

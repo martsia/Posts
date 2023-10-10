@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-<<<<<<< HEAD
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +17,3 @@ class ViewController: UIViewController {
 }
 
 
-=======
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-
-}
-
->>>>>>> 1725053 (Add files via upload)

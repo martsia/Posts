@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		A347B5CA2AD465CC00F7B3A7 /* libAlamofire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A347B5C92AD465CC00F7B3A7 /* libAlamofire.a */; };
-=======
->>>>>>> 1725053 (Add files via upload)
 		A3BBB0EE2AD0340E00D9EBF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BBB0ED2AD0340E00D9EBF5 /* AppDelegate.swift */; };
 		A3BBB0F02AD0340E00D9EBF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BBB0EF2AD0340E00D9EBF5 /* SceneDelegate.swift */; };
 		A3BBB0F22AD0340E00D9EBF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BBB0F12AD0340E00D9EBF5 /* ViewController.swift */; };
@@ -25,10 +22,7 @@
 /* Begin PBXFileReference section */
 		4FED20BE266B9DD00C6990D2 /* libPods-Posts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Posts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E2A626DF78EE5931FC11C8 /* Pods-Posts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posts.release.xcconfig"; path = "Target Support Files/Pods-Posts/Pods-Posts.release.xcconfig"; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		A347B5C92AD465CC00F7B3A7 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
-=======
->>>>>>> 1725053 (Add files via upload)
 		A3BBB0EA2AD0340E00D9EBF5 /* Posts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3BBB0ED2AD0340E00D9EBF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3BBB0EF2AD0340E00D9EBF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,10 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				A347B5CA2AD465CC00F7B3A7 /* libAlamofire.a in Frameworks */,
-=======
->>>>>>> 1725053 (Add files via upload)
 				E0E543DEE3CDB2E773F08F43 /* libPods-Posts.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,20 +89,13 @@
 				DA68905E91950DFE3CBBE1BC /* Pods-Posts.debug.xcconfig */,
 				61E2A626DF78EE5931FC11C8 /* Pods-Posts.release.xcconfig */,
 			);
-<<<<<<< HEAD
-=======
-			name = Pods;
->>>>>>> 1725053 (Add files via upload)
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		EF1B4029ADBB762997495286 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				A347B5C92AD465CC00F7B3A7 /* libAlamofire.a */,
-=======
->>>>>>> 1725053 (Add files via upload)
 				4FED20BE266B9DD00C6990D2 /* libPods-Posts.a */,
 			);
 			name = Frameworks;
